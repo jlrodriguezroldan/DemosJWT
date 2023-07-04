@@ -147,53 +147,51 @@ openssl rsa -in privatekey.pem -pubout -outform DER -out publickey.der
 
 ## Code for private key
 
-import java.nio.file.*;
+    import java.nio.file.*;
 
-import java.security.*;
+    import java.security.*;
 
-import java.security.spec.*;
+    import java.security.spec.*;
 
-public class PrivateKeyReader {
+    public class PrivateKeyReader {
 
-  public static PrivateKey get(String filename) throws Exception {
+      public static PrivateKey get(String filename) throws Exception {
 
-      byte[] keyBytes = Files.readAllBytes(Paths.get(filename));
+          byte[] keyBytes = Files.readAllBytes(Paths.get(filename));
 
-      PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(keyBytes);
+          PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(keyBytes);
 
-      KeyFactory kf = KeyFactory.getInstance("RSA");
+          KeyFactory kf = KeyFactory.getInstance("RSA");
 
-      return kf.generatePrivate(spec);
+          return kf.generatePrivate(spec);
   
-  }
+      }
 
-}
+    }
 
 ## Code for public key
 
-    <em>import java.nio.file.*;</em>
+    import java.nio.file.*;
 
-    <em>import java.security.*;</em>
+    import java.security.*;
 
-    <em>import java.security.spec.*;</em>
+    import java.security.spec.*;
 
-    <em>public class PublicKeyReader {</em>
+    public class PublicKeyReader {
 
-      <em>public static PublicKey get(String filename) throws Exception {</em>
+      public static PublicKey get(String filename) throws Exception {
         
-          <em>byte[] keyBytes = Files.readAllBytes(Paths.get(filename));</em>
+          byte[] keyBytes = Files.readAllBytes(Paths.get(filename));
 
-          <em>X509EncodedKeySpec spec = new X509EncodedKeySpec(keyBytes);</em>
+          X509EncodedKeySpec spec = new X509EncodedKeySpec(keyBytes);
 
-          <em>KeyFactory kf = KeyFactory.getInstance("RSA");</em>
+          KeyFactory kf = KeyFactory.getInstance("RSA");
 
-          <em>return kf.generatePublic(spec);</em>
+          return kf.generatePublic(spec);
 
-      <em>}</em>
+      }
       
-    <em>}</em>
-
-
+    }
 
 ## Getting started
 
