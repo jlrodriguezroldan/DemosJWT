@@ -133,20 +133,18 @@ Private key size has the following four options.
 
 ## For JAVA
 
-Convert private key to PKCS#8 format
+- Convert private key to PKCS#8 format
 
 openssl pkcs8 -topk8 -inform PEM -outform DER -in privatekey.pem -out privatekey.der -nocrypt
 
-Convert public key to DER format
+- Convert public key to DER format
 
 openssl rsa -in privatekey.pem -pubout -outform DER -out publickey.der
 
 ## Code for private key
 
 import java.nio.file.*;
-
 import java.security.*;
-
 import java.security.spec.*;
 
 public class PrivateKeyReader {
