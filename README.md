@@ -131,19 +131,19 @@ Private key size has the following four options.
 
 - public key -> openssl rsa -in privatekey.pem -out publickey.pem -pubout -outform PEM
 
+![alt convert DER format](imgkeyssl06.png)
+
 ## For JAVA
 
 - Convert private key to PKCS#8 format
 
 openssl pkcs8 -topk8 -inform PEM -outform DER -in privatekey.pem -out privatekey.der -nocrypt
 
-![alt convert PKCS#8 format](imgkeyssl05.png)
-
 - Convert public key to DER format
 
 openssl rsa -in privatekey.pem -pubout -outform DER -out publickey.der
 
-![alt convert DER format](imgkeyssl06.png)
+![alt convert PKCS#8 format](imgkeyssl05.png)
 
 ## Code for private key
 
