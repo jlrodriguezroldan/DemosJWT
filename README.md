@@ -113,6 +113,60 @@ Add C:\Program Files\OpenSSL-Win64\bin\ in Windows environment variables
 
 ![alt add Win64OpenSSL to path](imgkeyssl03.png)
 
+## Algoritmo = RSA
+
+Private key size has the following four options.
+
+- 512 bit low resistance key
+
+- 1024 bit medium strength key
+
+- 2048 bit high strength key
+
+- 4096 bit very high resistance key
+
+## In powershell
+
+- private key -> openssl genrsa -out privatekey.pem 2048
+
+- public key -> openssl rsa -in privatekey.pem -out publickey.pem -pubout -outform PEM
+
+## For JAVA
+
+Convert private key to PKCS#8 format
+
+openssl pkcs8 -topk8 -inform PEM -outform DER -in privatekey.pem -out privatekey.der -nocrypt
+
+Convert public key to DER format
+
+openssl rsa -in privatekey.pem -pubout -outform DER -out publickey.der
+
+## Code for private key
+
+import java.nio.file.*;
+
+import java.security.*;
+
+import java.security.spec.*;
+
+public class PrivateKeyReader {
+
+  public static PrivateKey get(String filename) throws Exception {
+
+    byte[] keyBytes = Files.readAllBytes(Paths.get(filename));
+
+    PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(keyBytes);
+    
+    KeyFactory kf = KeyFactory.getInstance("RSA");
+    
+    return kf.generatePrivate(spec);
+  
+  }
+
+}
+
+## Code for public key
+
 ## Getting started
 
 To make it easy for you to get started with GitLab, here's a list of recommended next steps.
