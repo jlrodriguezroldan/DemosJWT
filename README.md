@@ -137,33 +137,63 @@ Private key size has the following four options.
 
 openssl pkcs8 -topk8 -inform PEM -outform DER -in privatekey.pem -out privatekey.der -nocrypt
 
+![alt convert PKCS#8 format](imgkeyssl05.png)
+
 - Convert public key to DER format
 
 openssl rsa -in privatekey.pem -pubout -outform DER -out publickey.der
 
+![alt convert DER format](imgkeyssl06.png)
+
 ## Code for private key
 
 import java.nio.file.*;
+
 import java.security.*;
+
 import java.security.spec.*;
 
 public class PrivateKeyReader {
 
   public static PrivateKey get(String filename) throws Exception {
 
-    byte[] keyBytes = Files.readAllBytes(Paths.get(filename));
+      byte[] keyBytes = Files.readAllBytes(Paths.get(filename));
 
-    PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(keyBytes);
-    
-    KeyFactory kf = KeyFactory.getInstance("RSA");
-    
-    return kf.generatePrivate(spec);
+      PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(keyBytes);
+
+      KeyFactory kf = KeyFactory.getInstance("RSA");
+
+      return kf.generatePrivate(spec);
   
   }
 
 }
 
 ## Code for public key
+
+import java.nio.file.*;
+
+import java.security.*;
+
+import java.security.spec.*;
+
+public class PublicKeyReader {
+
+  public static PublicKey get(String filename) throws Exception {
+    
+      byte[] keyBytes = Files.readAllBytes(Paths.get(filename));
+
+      X509EncodedKeySpec spec = new X509EncodedKeySpec(keyBytes);
+
+      KeyFactory kf = KeyFactory.getInstance("RSA");
+
+      return kf.generatePublic(spec);
+
+  }
+  
+}
+
+
 
 ## Getting started
 
