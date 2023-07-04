@@ -171,27 +171,27 @@ public class PrivateKeyReader {
 
 ## Code for public key
 
-  <em>import java.nio.file.*;</em>
+    <em>import java.nio.file.*;</em>
 
-  <em>import java.security.*;</em>
+    <em>import java.security.*;</em>
 
-  <em>import java.security.spec.*;</em>
+    <em>import java.security.spec.*;</em>
 
-  public class PublicKeyReader {
+    <em>public class PublicKeyReader {</em>
 
-    public static PublicKey get(String filename) throws Exception {
+      <em>public static PublicKey get(String filename) throws Exception {</em>
+        
+          <em>byte[] keyBytes = Files.readAllBytes(Paths.get(filename));</em>
+
+          <em>X509EncodedKeySpec spec = new X509EncodedKeySpec(keyBytes);</em>
+
+          <em>KeyFactory kf = KeyFactory.getInstance("RSA");</em>
+
+          <em>return kf.generatePublic(spec);</em>
+
+      <em>}</em>
       
-        byte[] keyBytes = Files.readAllBytes(Paths.get(filename));
-
-        X509EncodedKeySpec spec = new X509EncodedKeySpec(keyBytes);
-
-        KeyFactory kf = KeyFactory.getInstance("RSA");
-
-        return kf.generatePublic(spec);
-
-    }
-    
-  }
+    <em>}</em>
 
 
 
